@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCARLET VINCI® | essence laboratory</title>
+    <meta
+      name="description"
+        content="SCARLET VINCI® is a fragrance, design, and immersive storytelling studio based in Shanghai."
+    />
+    <style>
+      :root {
+        --paper: #fbf7ed;
+        --ink: #000000;
+        --red: #c11b17;
+        --line: #bdbdbd;
+        --gold: #b8975d;
+        --soft: #f7f1e7;
+        --muted: #555555;
+        --max: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(rgba(251, 247, 237, 0.78), rgba(251, 247, 237, 0.78)),
+          url("assets/background-desktop.jpg") center top / cover fixed,
+          var(--paper);
+        color: var(--ink);
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px clamp(20px, 4vw, 60px);
+        background: rgba(251, 247, 237, 0.82);
+        border-bottom: 1px solid rgba(189, 189, 189, 0.45);
+        backdrop-filter: blur(16px);
+      }
+
+      .mark {
+        font-weight: 800;
+        font-size: 15px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 3vw, 34px);
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .nav a {
+        transition: color 160ms ease;
+      }
+
+      .nav a:hover {
+        color: var(--red);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      .section {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+        padding: clamp(76px, 10vw, 138px) 0;
+      }
+
+      .hero {
+        min-height: 92vh;
+        display: grid;
+        place-items: center;
+        padding: 110px 20px 70px;
+        text-align: center;
+        background: transparent;
+      }
+
+      .hero-inner {
+        width: min(940px, 100%);
+      }
+
+      .hero-logo {
+        width: min(860px, 96vw);
+        margin: 0 auto 8px;
+        mix-blend-mode: multiply;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--red);
+        font-family: Didot, "Bodoni 72", "Times New Roman", "Noto Serif SC", serif;
+        font-size: clamp(18px, 2.2vw, 26px);
+        font-style: italic;
+      }
+
+      .hero-statement {
+        max-width: 760px;
+        margin: clamp(72px, 12vh, 118px) auto 0;
+      }
+
+      .kicker {
+        margin: 0 0 18px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 22px;
+        font-size: clamp(36px, 6vw, 78px);
+        line-height: 1.04;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 21px);
+        line-height: 1.85;
+      }
+
+      .cn {
+        display: block;
+        margin-top: 12px;
+        color: #202020;
+        font-size: 0.88em;
+      }
+
+      .rule {
+        width: min(var(--max), calc(100% - 40px));
+        height: 1px;
+        margin: 0 auto;
+        background: var(--line);
+      }
+
+      .profile {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: clamp(36px, 7vw, 92px);
+        align-items: end;
+      }
+
+      .profile-copy h2,
+      .section-heading h2 {
+        margin-bottom: 22px;
+        font-size: clamp(30px, 4.8vw, 62px);
+        line-height: 1.08;
+        text-transform: uppercase;
+      }
+
+      .profile-copy p,
+      .section-heading p,
+      .line-card p,
+      .domain p,
+      .product p,
+      .contact-copy p {
+        color: var(--muted);
+        line-height: 1.82;
+      }
+
+      .profile-image {
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 14px;
+      }
+
+      .profile-image img {
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+      }
+
+      .meta-list {
+        display: grid;
+        gap: 1px;
+        margin-top: 42px;
+        background: var(--line);
+        border: 1px solid var(--line);
+      }
+
+      .meta-row {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: 20px;
+        padding: 18px 20px;
+        background: var(--paper);
+        font-size: 13px;
+        text-transform: uppercase;
+      }
+
+      .meta-row b {
+        color: var(--red);
+      }
+
+      .domains {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+      }
+
+      .domain {
+        min-height: 250px;
+        padding: clamp(22px, 3vw, 34px);
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: rgba(250, 249, 246, 0.46);
+      }
+
+      .domain small {
+        display: block;
+        margin-bottom: 52px;
+        color: var(--gold);
+        font-family: Didot, "Bodoni 72", "Times New Roman", serif;
+        font-size: 28px;
+      }
+
+      .domain h3 {
+        margin-bottom: 14px;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      .section-heading {
+        max-width: 780px;
+        margin-bottom: 44px;
+      }
+
+      .collection-lines {
+        display: grid;
+        gap: 16px;
+      }
+
+      .line-card {
+        display: grid;
+        grid-template-columns: 150px 1fr 0.82fr;
+        gap: clamp(18px, 4vw, 56px);
+        align-items: start;
+        padding: clamp(24px, 4vw, 42px);
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.36);
+      }
+
+      .line-index {
+        color: var(--gold);
+        font-family: Didot, "Bodoni 72", "Times New Roman", serif;
+        font-size: clamp(42px, 6vw, 74px);
+        line-height: 0.9;
+      }
+
+      .line-card h3 {
+        margin-bottom: 10px;
+        font-size: clamp(24px, 3vw, 38px);
+        text-transform: uppercase;
+      }
+
+      .line-card p {
+        margin-bottom: 0;
+      }
+
+      .line-tag {
+        justify-self: end;
+        padding-top: 8px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .parfum {
+        padding: clamp(76px, 10vw, 128px) 0;
+      }
+
+      .parfum-inner {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(18px, 4vw, 52px);
+      }
+
+      .product {
+        text-align: center;
+      }
+
+      .product-frame {
+        overflow: hidden;
+        border: 3px solid var(--line);
+        background: #fff;
+        aspect-ratio: 1 / 1.28;
+      }
+
+      .product-frame img {
+        height: 120%;
+        object-fit: cover;
+        object-position: 50% 0%;
+      }
+
+      .stars {
+        margin: 24px 0 12px;
+        color: var(--gold);
+        font-size: 20px;
+      }
+
+      .product h3 {
+        margin-bottom: 12px;
+        font-family: Didot, "Bodoni 72", "Times New Roman", "Noto Serif SC", serif;
+        font-size: clamp(28px, 3.4vw, 42px);
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .product p {
+        margin: 0 auto;
+        max-width: 300px;
+        font-size: 14px;
+      }
+
+      .split-feature {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(22px, 5vw, 74px);
+        align-items: center;
+      }
+
+      .feature-image {
+        border: 1px solid var(--line);
+        background: #fff;
+        padding: 12px;
+      }
+
+      .feature-image img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+
+      .contact {
+        text-align: center;
+      }
+
+      .contact-copy {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+
+      .email {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        margin-top: 28px;
+        padding: 0 24px;
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition:
+          background 160ms ease,
+          color 160ms ease,
+          border-color 160ms ease;
+      }
+
+      .email:hover {
+        background: var(--red);
+        border-color: var(--red);
+        color: #fff;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+        padding: 28px 0 42px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 900px) {
+        body {
+          background:
+            linear-gradient(rgba(251, 247, 237, 0.8), rgba(251, 247, 237, 0.8)),
+            url("assets/background-mobile.jpg") center top / cover fixed,
+            var(--paper);
+        }
+
+        .hero {
+          background: transparent;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        .profile,
+        .split-feature {
+          grid-template-columns: 1fr;
+        }
+
+        .domains,
+        .products {
+          grid-template-columns: 1fr;
+        }
+
+        .line-card {
+          grid-template-columns: 1fr;
+        }
+
+        .line-tag {
+          justify-self: start;
+        }
+
+        .product-frame {
+          max-width: 430px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .site-header {
+          padding: 16px 20px;
+        }
+
+        .mark {
+          font-size: 13px;
+        }
+
+        .hero {
+          min-height: 88vh;
+          padding-top: 92px;
+        }
+
+        .hero-statement {
+          margin-top: 64px;
+        }
+
+        .meta-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .domain {
+          min-height: 210px;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="mark" href="#top">SCARLET VINCI®</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#studio">Studio</a>
+        <a href="#practice">Practice</a>
+        <a href="#collections">Collections</a>
+        <a href="#parfum">Parfum</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="SCARLET VINCI essence laboratory">
+        <div class="hero-inner">
+          <img class="hero-logo" src="assets/logo-scarlet-vinci-r.png" alt="SCARLET VINCI registered logo" />
+          <p class="subtitle">essence laboratory</p>
+
+          <div class="hero-statement">
+            <p class="kicker">Fragrance studio / Shanghai</p>
+            <h1>A fragrance, design, and immersive storytelling studio.</h1>
+            <p class="lead">
+              SCARLET VINCI® works across perfume design, product creation, and sensory narratives for contemporary fragrance culture.
+              <span class="cn">香氛、设计与沉浸式叙事工作室，坐标上海。</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section class="section profile" id="studio">
+        <div class="profile-copy">
+          <p class="kicker">Studio profile / 品牌工作室简介</p>
+          <h2>Essence as material. Story as form.</h2>
+          <p>
+            Founded by Aven Xu, SCARLET VINCI® operates through digital, physical, and conceptual formats. The studio collaborates with leaders in fragrance, cosmetics, and fashion.
+            <span class="cn">由 Aven Xu 创立，工作内容覆盖香氛产品、视觉设计与概念叙事。</span>
+          </p>
+          <div class="meta-list" aria-label="Studio facts">
+            <div class="meta-row">
+              <b>Core services</b>
+              <span>Perfume design, perfumery studio, fragrance products</span>
+            </div>
+            <div class="meta-row">
+              <b>Location</b>
+              <span>Based in Shanghai</span>
+            </div>
+            <div class="meta-row">
+              <b>Clients</b>
+              <span>Fragrance, cosmetics, fashion, private commissions</span>
+            </div>
+          </div>
+        </div>
+        <figure class="profile-image">
+          <img src="assets/brand-paper.jpg" alt="SCARLET VINCI printed brand detail" />
+        </figure>
+      </section>
+
+      <section class="section" id="practice">
+        <div class="section-heading">
+          <p class="kicker">Practice domains / 实践领域</p>
+          <h2>Four ways to construct scent.</h2>
+          <p>
+            Each project begins with a material, an atmosphere, or a scene. The final form may be a perfume, a product system, a ritual, or a spatial memory.
+            <span class="cn">从原料、氛围或场景开始，最终落到香水、产品系统、仪式或空间记忆。</span>
+          </p>
+        </div>
+        <div class="domains">
+          <article class="domain">
+            <small>01</small>
+            <h3>Perfume Design</h3>
+            <p>Formula direction, olfactory profile, and perfume identity for products and private briefs.</p>
+          </article>
+          <article class="domain">
+            <small>02</small>
+            <h3>Perfumery Studio</h3>
+            <p>Small-batch experiments, sample development, and fragrance material studies.</p>
+          </article>
+          <article class="domain">
+            <small>03</small>
+            <h3>Fragrance Products</h3>
+            <p>Commercial collections, packaging direction, and retail-ready fragrance systems.</p>
+          </article>
+          <article class="domain">
+            <small>04</small>
+            <h3>Immersive Storytelling</h3>
+            <p>Scent-led narratives for events, brand activations, exhibitions, and gifting.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="collections">
+        <div class="section-heading">
+          <p class="kicker">Collections / 产品线</p>
+          <h2>Three product lines, one studio language.</h2>
+          <p>
+            The current structure keeps the commercial line, custom line, and salon line distinct while allowing future products to expand without changing the site foundation.
+            <span class="cn">先保留三条线的轮廓，后续可以边补资料边扩展具体产品。</span>
+          </p>
+        </div>
+        <div class="collection-lines">
+          <article class="line-card">
+            <span class="line-index">I</span>
+            <div>
+              <h3>Online Collection</h3>
+              <p>Ready-to-wear fragrances for online retail. Direct, accessible, and designed for daily use.</p>
+            </div>
+            <span class="line-tag">E-commerce series / 电商系列</span>
+          </article>
+          <article class="line-card">
+            <span class="line-index">II</span>
+            <div>
+              <h3>Custom Formulation</h3>
+              <p>Private and brand commissions built around a person, occasion, memory, or visual world.</p>
+            </div>
+            <span class="line-tag">Bespoke series / 定制系列</span>
+          </article>
+          <article class="line-card">
+            <span class="line-index">III</span>
+            <div>
+              <h3>Salon Collection</h3>
+              <p>Conceptual fragrances with stronger authorship, limited presence, and a higher material language.</p>
+            </div>
+            <span class="line-tag">Salon series / 沙龙线</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="parfum" id="parfum">
+        <div class="parfum-inner">
+          <div class="section-heading">
+            <p class="kicker">Parfum / 香水</p>
+            <h2>Selected terminal line preview.</h2>
+            <p>
+              The following three products are used as visual anchors for the first version. More fragrance lines can be added after the collection materials are finalized.
+              <span class="cn">以下三款先作为首版视觉锚点，更多产品资料确认后继续扩展。</span>
+            </p>
+          </div>
+          <div class="products">
+            <article class="product">
+              <div class="product-frame">
+                <img src="assets/product-tubereuse.jpg" alt="SCARLET VINCI TUBEREUSE perfume" />
+              </div>
+              <div class="stars" aria-label="Five-star product rating">★★★★★</div>
+              <h3>TUBEREUSE</h3>
+              <p>White floral tension, black label, soft gold typography. A nocturnal opening for the line.</p>
+            </article>
+            <article class="product">
+              <div class="product-frame">
+                <img src="assets/product-iris.jpg" alt="SCARLET VINCI IRIS perfume" />
+              </div>
+              <div class="stars" aria-label="Five-star product rating">★★★★★</div>
+              <h3>IRIS</h3>
+              <p>Powdered elegance and pale texture. A precise, quiet composition built around white iris.</p>
+            </article>
+            <article class="product">
+              <div class="product-frame">
+                <img src="assets/product-violette.jpg" alt="SCARLET VINCI VIOLETTE perfume" />
+              </div>
+              <div class="stars" aria-label="Five-star product rating">★★★★★</div>
+              <h3>VIOLETTE</h3>
+              <p>Violet shadow, dark glass, restrained sweetness. A floral note with a sharper silhouette.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section split-feature">
+        <figure class="feature-image">
+          <img src="assets/gift-custom.jpg" alt="SCARLET VINCI custom gifting card" />
+        </figure>
+        <div class="profile-copy">
+          <p class="kicker">Private commission / 定制服务</p>
+          <h2>For gifts, rituals, and personal archives.</h2>
+          <p>
+            Custom projects may take the form of written blessings, personal scent profiles, event gifts, or fragrance objects for a specific relationship.
+            <span class="cn">可用于礼赠、纪念日、私人文本与专属气味物件。</span>
+          </p>
+        </div>
+      </section>
+
+      <div class="rule"></div>
+
+      <section class="section contact" id="contact">
+        <div class="contact-copy">
+          <p class="kicker">Contact / 联系</p>
+          <h2>For studio inquiries and fragrance commissions.</h2>
+          <p>
+            Please contact the studio by email. A concise project brief, timeline, and expected format are welcome.
+            <span class="cn">合作、定制与项目咨询，请通过邮件联系。</span>
+          </p>
+          <a class="email" href="mailto:18024832@qq.com">18024832@qq.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>SCARLET VINCI® · essence laboratory</span>
+      <span>Shanghai · 2026</span>
+    </footer>
+  </body>
+</html>
