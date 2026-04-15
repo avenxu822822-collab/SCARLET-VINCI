@@ -311,13 +311,14 @@ The key has been authorized in GitHub.
 
 ## Current Contact
 
-Current site email:
+Current site contact:
 
 ```text
 18024832@qq.com
+WECHAT: 18024832
 ```
 
-Brief originally mentioned WeChat too, but the first live version keeps contact minimal through email.
+The live version keeps contact minimal and text-only: email plus WeChat, no social media icons.
 
 ## Future Update Suggestions
 
