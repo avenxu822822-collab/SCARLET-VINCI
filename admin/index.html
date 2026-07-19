@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8e4" />
+    <title>SV 预约管理台</title>
+    <style>
+      :root { --paper:#fff8e4; --ink:#111; --red:#c92b32; --line:rgba(17,17,17,.48); --muted:#6f6b62; }
+      * { box-sizing:border-box; }
+      body { margin:0; min-width:320px; background:#111; color:var(--ink); font-family:"Helvetica Neue",Arial,"PingFang SC",sans-serif; }
+      button,input,select,textarea { font:inherit; }
+      button { cursor:pointer; }
+      .shell { width:min(1040px,100%); min-height:100vh; margin:auto; background:var(--paper); }
+      .topbar { min-height:70px; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--ink); }
+      .brand { margin:0; font-size:14px; line-height:1; font-weight:700; letter-spacing:.16em; }
+      .brand span { color:var(--red); }
+      .title-meta { text-align:right; font-size:10px; line-height:1.45; font-weight:700; letter-spacing:.12em; }
+      .title-meta small { display:block; margin-top:3px; font-family:"PingFang SC",sans-serif; font-weight:400; letter-spacing:0; }
+      .login { width:min(460px,calc(100% - 40px)); margin:clamp(70px,15vh,160px) auto; border:1px solid var(--ink); }
+      .login-head { padding:24px; background:#111; color:var(--paper); }
+      .eyebrow { display:block; font-size:10px; font-weight:700; letter-spacing:.14em; }
+      h1 { margin:10px 0 0; font-size:40px; letter-spacing:-.06em; line-height:.92; }
+      .login form { padding:24px; display:grid; gap:16px; }
+      label { display:grid; gap:7px; font-size:10px; font-weight:700; letter-spacing:.1em; }
+      label small { font-family:"PingFang SC",sans-serif; font-size:11px; font-weight:400; letter-spacing:0; color:var(--muted); }
+      input,select,textarea { width:100%; border:1px solid var(--ink); border-radius:0; background:transparent; padding:12px; color:var(--ink); }
+      .primary { border:0; border-radius:0; padding:14px 16px; background:var(--red); color:var(--paper); font-size:11px; font-weight:700; letter-spacing:.14em; }
+      .secondary { border:1px solid var(--ink); border-radius:0; padding:9px 12px; background:transparent; color:var(--ink); font-size:10px; font-weight:700; letter-spacing:.1em; }
+      .login-note,.message { margin:0; font-family:"PingFang SC",sans-serif; font-size:12px; line-height:1.65; color:var(--muted); }
+      .message.error { color:var(--red); } .message.success { color:#14613d; }
+      .admin { padding-bottom:36px; }
+      .toolbar { padding:18px 24px; display:flex; align-items:end; justify-content:space-between; gap:16px; border-bottom:1px solid var(--ink); }
+      .summary { margin:0; font-size:23px; line-height:1; font-weight:700; letter-spacing:-.045em; }
+      .summary small { display:block; margin-top:6px; color:var(--muted); font-family:"PingFang SC",sans-serif; font-size:12px; font-weight:400; letter-spacing:0; }
+      .toolbar-actions { display:flex; align-items:center; gap:8px; }
+      .filters { padding:14px 24px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; border-bottom:1px solid var(--ink); }
+      .filters select { padding:10px; font-size:12px; }
+      .list { display:grid; }
+      .empty { padding:72px 24px; text-align:center; font-family:"PingFang SC",sans-serif; color:var(--muted); }
+      .reservation { width:100%; padding:17px 24px; display:grid; grid-template-columns:110px minmax(0,1.2fr) minmax(0,1fr) 110px 26px; align-items:center; gap:14px; border:0; border-bottom:1px solid var(--line); background:transparent; color:var(--ink); text-align:left; }
+      .reservation:hover,.reservation:focus-visible { background:#f7efd8; outline:none; }
+      .reservation strong { font-size:14px; line-height:1.2; } .reservation small { display:block; margin-top:5px; font-family:"PingFang SC",sans-serif; font-size:11px; line-height:1.45; color:var(--muted); }
+      .status { display:inline-flex; align-items:center; justify-content:center; min-width:80px; padding:7px 8px; border:1px solid currentColor; color:var(--red); font-size:10px; font-weight:700; letter-spacing:.08em; }
+      .status.contacted { color:#a16d0e; } .status.paid { color:#145d38; } .status.shipped { color:#0f4b79; } .status.cancelled { color:#79746a; }
+      .arrow { font-size:19px; text-align:right; }
+      dialog { width:min(720px,calc(100% - 28px)); max-height:calc(100vh - 28px); padding:0; border:1px solid var(--ink); border-radius:0; background:var(--paper); color:var(--ink); box-shadow:0 28px 80px rgba(0,0,0,.45); }
+      dialog::backdrop { background:rgba(0,0,0,.72); }
+      .detail-head { padding:20px 22px; display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid var(--ink); }
+      .detail-head h2 { margin:8px 0 0; font-size:28px; letter-spacing:-.05em; }
+      .close { width:34px; height:34px; border:1px solid var(--ink); background:transparent; font-size:22px; }
+      .detail { padding:22px; display:grid; grid-template-columns:1fr 1fr; gap:16px 24px; }
+      .detail-item { margin:0; font-family:"PingFang SC",sans-serif; font-size:14px; line-height:1.6; word-break:break-word; }
+      .detail-item b { display:block; margin-bottom:3px; font-family:"Helvetica Neue",Arial,sans-serif; font-size:10px; letter-spacing:.1em; }
+      .detail-item.full { grid-column:1 / -1; }
+      .detail-actions { padding:18px 22px 22px; display:flex; gap:10px; align-items:end; border-top:1px solid var(--ink); }
+      .detail-actions label { flex:1; } .detail-actions select { padding:11px; }
+      [hidden] { display:none !important; }
+      @media (max-width:680px) { .topbar { min-height:62px; padding:14px 16px; } .title-meta { font-size:9px; } .login { width:calc(100% - 32px); margin:48px auto; } .login-head,.login form { padding:20px; } h1 { font-size:35px; } .toolbar { padding:16px; align-items:start; flex-direction:column; } .toolbar-actions { width:100%; justify-content:space-between; } .filters { padding:10px 16px; grid-template-columns:1fr 1fr; } .filters select:last-child { grid-column:1 / -1; } .reservation { padding:14px 16px; grid-template-columns:minmax(0,1fr) auto; gap:8px; } .reservation > :nth-child(3) { grid-column:1 / -1; } .reservation > :nth-child(4) { grid-column:1; } .reservation > :nth-child(5) { grid-column:2; grid-row:1 / span 3; } .detail { padding:18px; grid-template-columns:1fr; gap:14px; } .detail-item.full { grid-column:auto; } .detail-actions { padding:16px 18px 18px; flex-direction:column; align-items:stretch; } }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar"><p class="brand">SCARLET <span>VINCI</span></p><p class="title-meta">SV RESERVATION DESK<small>预约管理台</small></p></header>
+
+      <section class="login" id="loginScreen">
+        <div class="login-head"><span class="eyebrow">INTERNAL ACCESS / 内部使用</span><h1>预约<br />管理台</h1></div>
+        <form id="loginForm"><label>EMAIL / 工作邮箱<input id="email" type="email" autocomplete="username" required placeholder="name@company.com" /></label><label>PASSWORD / 内部密码<input id="password" type="password" autocomplete="current-password" required /></label><button class="primary" type="submit">ENTER DESK / 进入管理台</button><p class="message" id="loginMessage">仅限已授权的内部账号。忘记密码请联系管理员。</p></form>
+      </section>
+
+      <section class="admin" id="adminScreen" hidden>
+        <div class="toolbar"><p class="summary" id="summary">预约单<small>正在读取...</small></p><div class="toolbar-actions"><button class="secondary" id="refresh" type="button">REFRESH / 刷新</button><button class="secondary" id="logout" type="button">LOG OUT / 退出</button></div></div>
+        <div class="filters"><select id="statusFilter" aria-label="筛选预约状态"><option value="">所有状态</option><option value="pending">待联系</option><option value="contacted">已联系</option><option value="paid">已付款</option><option value="shipped">已发货</option><option value="cancelled">已取消</option></select><select id="productFilter" aria-label="筛选产品"><option value="">所有产品</option></select><select id="dateFilter" aria-label="筛选提交日期"><option value="">所有时间</option><option value="today">今天</option><option value="week">近 7 天</option><option value="month">近 30 天</option></select></div>
+        <div class="list" id="reservationList"></div><p class="empty" id="emptyState" hidden>暂时没有符合条件的预约单。</p>
+      </section>
+    </main>
+
+    <dialog id="detailDialog"><div class="detail-head"><div><span class="eyebrow" id="detailCode"></span><h2 id="detailName"></h2></div><button class="close" id="closeDetail" type="button" aria-label="关闭">×</button></div><div class="detail" id="detailBody"></div><div class="detail-actions"><label>STATUS / 订单状态<select id="statusSelect"><option value="pending">待联系</option><option value="contacted">已联系</option><option value="paid">已付款</option><option value="shipped">已发货</option><option value="cancelled">已取消</option></select></label><button class="primary" id="saveStatus" type="button">SAVE STATUS / 保存状态</button></div></dialog>
+    <script src="admin.js"></script>
+  </body>
+</html>
