@@ -45,12 +45,11 @@ to authenticated
 using (public.is_active_sv_staff())
 with check (public.is_active_sv_staff());
 
--- Add each staff email only after you create the matching Supabase Auth user.
--- Replace the example emails below before running these lines.
--- insert into public.staff_users (email, display_name) values
---   ('owner@your-company.com', '管理员'),
---   ('colleague@your-company.com', '同事')
--- on conflict (email) do update set display_name = excluded.display_name, is_active = true;
+-- Approved staff accounts. The matching Supabase Auth users must exist first.
+insert into public.staff_users (email, display_name) values
+  ('18024832@qq.com', 'SV 管理员'),
+  ('monica820818@hotmail.com', 'SV 同事')
+on conflict (email) do update set display_name = excluded.display_name, is_active = true;
 
 -- To remove access later:
 -- update public.staff_users set is_active = false where email = 'colleague@your-company.com';
