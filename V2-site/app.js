@@ -18,7 +18,7 @@ const products = [
   { code:"CD-04", category:"candle", name:"IRIS SANDALWOOD", cn:"鸢尾檀香", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"海盐、蜜瓜", heart:"紫罗兰、无花果、鸢尾花", base:"檀香、琥珀、麝香" },
   { code:"CD-05", category:"candle", name:"RICH AMERICANO", cn:"浓情美式", size:"170G", price:"RMB 98", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"咖啡", heart:"糖", base:"奶油、咖啡" },
   { code:"CD-07", category:"candle", name:"BLUE COASTLINE", cn:"蓝色海岸线", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"海洋、蜜瓜、苹果", heart:"铃兰、茉莉", base:"檀香、麝香" },
-  { code:"CD-06", category:"candle", name:"BRILLIANT CRYSTAL", cn:"璨水晶", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"海洋、臭氧、苹果", heart:"铃兰、小苍兰", base:"广藿香、香草、雪松" },
+  { code:"CD-06", category:"candle", name:"BRILLIANT CRYSTAL", cn:"璀璨水晶", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"海洋、臭氧、苹果", heart:"铃兰、小苍兰", base:"广藿香、香草、雪松" },
   { code:"CD-09", category:"candle", name:"CHRISTMAS HEARTH", cn:"圣诞壁炉", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"肉桂、生姜、橙皮", heart:"丁香、柏树", base:"松树、冷杉" },
   { code:"CD-10", category:"candle", name:"WHITE TEA AND HINOKI", cn:"白茶扁柏木", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"松树、臭氧、白茶", heart:"扁柏、松树", base:"雪松、琥珀、杜松" },
   { code:"CD-11", category:"candle", name:"WATER LILY AND COTTON", cn:"睡莲与棉花", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"紫罗兰、海洋", heart:"含羞草、百合、豆蔻、棉花", base:"零陵香豆、棉花糖" },
