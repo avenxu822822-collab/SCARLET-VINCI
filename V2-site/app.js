@@ -25,12 +25,12 @@ const products = [
   { code:"CD-12", category:"candle", name:"MINT AND EUCALYPTUS", cn:"薄荷尤加利", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"薄荷、尤加利", heart:"丁香、雪松", base:"广藿香、香草、粉感" },
   { code:"CD-13", category:"candle", name:"OAKMOSS AND AMBER", cn:"苔藓与琥珀", size:"170G", price:"RMB 128", family:"HOME FRAGRANCE / SCENTED CANDLE", top:"鼠尾草、柑橘、葡萄柚", heart:"薰衣草", base:"琥珀、零陵香豆、橡木苔" },
   { code:"CD-08", category:"candle", name:"SCENTED CANDLE GIFT SET", cn:"香氛蜡烛礼盒", size:"GIFT SET", price:"预约咨询", family:"HOME COLLECTION / GIFT SET", notesPending:true }
-].map(product => ({ ...product, image:`${CATALOG_ASSET_DIR}/${product.code}.png` }));
+].map(product => ({ ...product, image:`${CATALOG_ASSET_DIR}/${product.code}.webp` }));
 
 const heroSlides = [
-  { image:"assets/hero/ombre-portrait-01.png", eyebrow:"ATELIER SERIES / 01", title:"OMBRÉ<br><em>LEATHER</em>", copy:"光影皮革。让柔软与锋利停留在同一片皮肤上。", link:"#/product/AF-02" },
-  { image:"assets/hero/musk-portrait.png", eyebrow:"MUSK STUDY / 02", title:"ULTIMATE<br><em>MUSK</em>", copy:"贴近身体的气味，不需要大声解释。", link:"#/product/AF-08" },
-  { image:"assets/hero/ombre-portrait-03.png", eyebrow:"SCARLET VINCI® / 04", title:"OBJECTS<br><em>FOR SCENT</em>", copy:"艺术香水与空间香氛，接受预约订购。", link:"#/shop/all" }
+  { image:"assets/hero/ombre-portrait-01.webp", eyebrow:"ATELIER SERIES / 01", title:"OMBRÉ<br><em>LEATHER</em>", copy:"光影皮革。让柔软与锋利停留在同一片皮肤上。", link:"#/product/AF-02" },
+  { image:"assets/hero/musk-portrait.webp", eyebrow:"MUSK STUDY / 02", title:"ULTIMATE<br><em>MUSK</em>", copy:"贴近身体的气味，不需要大声解释。", link:"#/product/AF-08" },
+  { image:"assets/hero/ombre-portrait-03.webp", eyebrow:"SCARLET VINCI® / 04", title:"OBJECTS<br><em>FOR SCENT</em>", copy:"艺术香水与空间香氛，接受预约订购。", link:"#/shop/all" }
 ];
 
 const app = document.querySelector("#app");
@@ -53,7 +53,7 @@ function esc(value) {
 
 function productCard(product) {
   return `<a class="product-card" href="#/product/${product.code}">
-    <figure><img src="${product.image}" alt="${esc(product.name)} ${esc(product.cn)}"></figure>
+    <figure><img src="${product.image}" alt="${esc(product.name)} ${esc(product.cn)}" loading="lazy" decoding="async"></figure>
     <div class="product-card-info">
       <span class="product-card-code">${product.code}</span>
       <h3>${esc(product.name)}</h3>
@@ -74,7 +74,7 @@ function renderHome() {
     <section class="hero" id="hero">
       <div class="hero-track" id="heroTrack">
         ${heroSlides.map((slide,index) => `<article class="hero-slide${index === 0 ? " active" : ""}" aria-hidden="${index === 0 ? "false" : "true"}">
-          <img src="${slide.image}" alt="" ${slide === heroSlides[0] ? "" : "loading=\"lazy\""}>
+          <img src="${slide.image}" alt="" decoding="async" ${slide === heroSlides[0] ? "fetchpriority=\"high\"" : "loading=\"lazy\""}>
           <div class="hero-copy">
             <p class="eyebrow">${slide.eyebrow}</p>
             <h1>${slide.title}</h1>
@@ -94,11 +94,11 @@ function renderHome() {
 
     <section class="category-cards" aria-label="香气分类">
       <a class="category-card" href="#/shop/perfume">
-        <img src="assets/hero/ombre-portrait-02.png" alt="SCARLET VINCI 艺术香水" loading="lazy">
+        <img src="assets/hero/ombre-portrait-02.webp" alt="SCARLET VINCI 艺术香水" loading="lazy" decoding="async">
         <div class="category-card-copy"><div><p class="eyebrow">01 / COLLECTION</p><h3>ART FRAGRANCE<small>艺术香水</small></h3></div><span class="category-arrow">↗</span></div>
       </a>
       <a class="category-card" href="#/shop/candle">
-        <img src="assets/products/CD-01.png" alt="SCARLET VINCI 香氛蜡烛" loading="lazy">
+        <img src="assets/products/catalog-20260723/CD-01.webp" alt="SCARLET VINCI 香氛蜡烛" loading="lazy" decoding="async">
         <div class="category-card-copy"><div><p class="eyebrow">02 / HOME</p><h3>SCENTED CANDLE<small>空间香氛</small></h3></div><span class="category-arrow">↗</span></div>
       </a>
     </section>
@@ -109,7 +109,7 @@ function renderHome() {
     </section>
 
     <section class="studio-banner">
-      <img src="assets/editorial/studio.jpg" alt="SCARLET VINCI 气味工作室" loading="lazy">
+      <img src="assets/editorial/studio.webp" alt="SCARLET VINCI 气味工作室" loading="lazy" decoding="async">
       <div class="studio-banner-copy"><p class="eyebrow">THE STUDIO / 上海</p><h2>WHERE SCENT<br>TAKES FORM.</h2><p>从试香纸、材料与记录开始，让气味逐渐成为可以被携带的对象。</p><a class="hero-link" href="#/maker">MEET THE MAKER / 主理人</a></div>
     </section>
   </div>`;
@@ -157,7 +157,7 @@ function renderShop(category = "all") {
     : `<section class="product-grid ${category}-grid" aria-label="产品目录">${selected.map(productCard).join("")}</section>`;
   app.innerHTML = `<div class="page-enter">
     <header class="catalogue-hero"><p class="eyebrow">OBJECTS / 2026</p><h1>SCENT<br><i>CATALOGUE</i></h1><p>浏览艺术香水与香氛蜡烛。点击任一产品查看香调档案，并提交预约订购。</p></header>
-    <div class="shop-campaign"><img src="assets/hero/ombre-portrait-03.png" alt="SCARLET VINCI 香气广告"><span>SCENT IN MOTION / CAMPAIGN 01</span></div>
+    <div class="shop-campaign"><img src="assets/hero/ombre-portrait-03.webp" alt="SCARLET VINCI 香气广告" decoding="async" fetchpriority="high"><span>SCENT IN MOTION / CAMPAIGN 01</span></div>
     <nav class="tabs" aria-label="产品分类">
       <a href="#/shop/all" class="${category === "all" ? "active" : ""}">ALL / ${products.length}</a>
       <a href="#/shop/perfume" class="${category === "perfume" ? "active" : ""}">ART FRAGRANCE / ${String(perfumeCount).padStart(2,"0")}</a>
@@ -170,7 +170,7 @@ function renderShop(category = "all") {
 function renderProduct(code) {
   const product = products.find(item => item.code === code) || products[0];
   setNav("shop");
-  const storyImage = product.code === "AF-02" ? "assets/hero/ombre-portrait-02.png" : product.code === "AF-08" ? "assets/hero/musk-portrait.png" : "assets/editorial/studio.jpg";
+  const storyImage = product.code === "AF-02" ? "assets/hero/ombre-portrait-02.webp" : product.code === "AF-08" ? "assets/hero/musk-portrait.webp" : "assets/editorial/studio.webp";
   const notesMarkup = product.notesPending
     ? `<div class="notes"><div class="note-row"><b>SCENT<br>香调</b><span>详细香调资料待补充，请预约咨询。</span></div></div>`
     : `<div class="notes" aria-label="香调信息">
@@ -179,7 +179,7 @@ function renderProduct(code) {
         <div class="note-row"><b>BASE<br>后调</b><span>${esc(product.base)}</span></div>
       </div>`;
   app.innerHTML = `<article class="detail-page page-enter">
-    <div class="detail-image"><img src="${product.image}" alt="${esc(product.name)} ${esc(product.cn)}"><span class="detail-counter">01 / 01</span></div>
+    <div class="detail-image"><img src="${product.image}" alt="${esc(product.name)} ${esc(product.cn)}" decoding="async" fetchpriority="high"><span class="detail-counter">01 / 01</span></div>
     <div class="detail-body">
       <p class="eyebrow detail-code">${product.code} / ${product.category === "perfume" ? "ART FRAGRANCE" : "SCENTED CANDLE"}</p>
       <h1>${esc(product.name)}</h1><p class="detail-cn">${esc(product.cn)}</p>
@@ -188,7 +188,7 @@ function renderProduct(code) {
       ${notesMarkup}
     </div>
     <div class="reserve-bar"><div><small>PRIVATE ORDER</small><strong>${product.price}</strong></div><button id="reserveButton" type="button">预约此款 ↗</button></div>
-    <section class="detail-story"><img src="${storyImage}" alt="" loading="lazy"><div class="detail-story-copy"><p class="eyebrow">SCENT DOSSIER</p><h2>AN OBJECT<br>WITH MEMORY.</h2><p>气味不是对材料的罗列，而是光线、皮肤、空间与记忆在同一时刻留下的轮廓。</p></div></section>
+    <section class="detail-story"><img src="${storyImage}" alt="" loading="lazy" decoding="async"><div class="detail-story-copy"><p class="eyebrow">SCENT DOSSIER</p><h2>AN OBJECT<br>WITH MEMORY.</h2><p>气味不是对材料的罗列，而是光线、皮肤、空间与记忆在同一时刻留下的轮廓。</p></div></section>
   </article>`;
   document.querySelector("#reserveButton").addEventListener("click", () => openReservation(product));
 }
@@ -197,7 +197,7 @@ function renderMaker() {
   setNav("maker");
   app.innerHTML = `<article class="maker-page page-enter">
     <header class="maker-title"><p class="eyebrow">THE MAKER / 01</p><h1>AVEN<br><i>XU</i></h1><p>SCARLET VINCI 主理人 / 调香与气味叙事创作者</p></header>
-    <img class="maker-portrait" src="assets/editorial/maker.jpg" alt="SCARLET VINCI 主理人 Aven Xu 在工作室创作">
+    <img class="maker-portrait" src="assets/editorial/maker.webp" alt="SCARLET VINCI 主理人 Aven Xu 在工作室创作" decoding="async">
     <section class="maker-copy">
       <p class="eyebrow">STUDIO PROFILE</p><h2>FRAGRANCE, DESIGN<br>& IMMERSIVE STORYTELLING.</h2>
       <p>SCARLET VINCI 是一家位于上海的香气、设计与沉浸式叙事工作室。我们通过香水设计、感官对象、影像与空间叙事，让气味成为能够被辨认、被记住的语言。</p>
@@ -207,7 +207,7 @@ function renderMaker() {
         <div class="maker-row"><b>LOCATION</b><span>Shanghai / 上海</span></div>
       </div>
     </section>
-    <section class="studio-banner"><img src="assets/editorial/studio.jpg" alt="SCARLET VINCI 工作室"><div class="studio-banner-copy"><p class="eyebrow">ESSENCE LABORATORY</p><h2>THE WORKSPACE.</h2><p>一间为气味、物件与故事持续工作的空间。</p></div></section>
+    <section class="studio-banner"><img src="assets/editorial/studio.webp" alt="SCARLET VINCI 工作室" loading="lazy" decoding="async"><div class="studio-banner-copy"><p class="eyebrow">ESSENCE LABORATORY</p><h2>THE WORKSPACE.</h2><p>一间为气味、物件与故事持续工作的空间。</p></div></section>
     <section class="contact-panel"><div><p class="eyebrow">PRIVATE COMMISSION</p><h2>订购、定制<br>与合作</h2></div><div class="qr-wrap"><img src="assets/editorial/wechat-qr.png" alt="主理人微信二维码"><p>扫描二维码联系主理人。<br>用于香型定制、合作与产品咨询。</p></div></section>
   </article>`;
 }
