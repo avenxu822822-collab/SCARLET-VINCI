@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="SCARLET VINCI® 香气、设计与沉浸式叙事工作室。">
+  <title>SCARLET VINCI® | Essence Laboratory</title>
+  <link rel="stylesheet" href="styles.css?v=9">
+</head>
+<body>
+  <a class="skip-link" href="#app">跳到主要内容</a>
+
+  <header class="topbar" id="topbar">
+    <button class="icon-button menu-button" id="menuButton" type="button" aria-label="打开导航" aria-controls="drawer" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <a class="wordmark" href="#/home" aria-label="SCARLET VINCI 首页">SCARLET <b>VINCI</b><sup>®</sup></a>
+    <button class="icon-button search-button" id="searchButton" type="button" aria-label="搜索产品">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+    </button>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <nav class="bottom-nav" aria-label="主要导航">
+    <a href="#/home" data-nav="home"><span class="nav-icon">⌂</span><small>首页</small></a>
+    <a href="#/shop/perfume" data-nav="shop"><span class="nav-icon">◇</span><small>香气</small></a>
+    <a href="#/shop/all" data-nav="catalogue"><span class="nav-icon">▦</span><small>选购</small></a>
+    <a href="#/maker" data-nav="maker"><span class="nav-icon">○</span><small>主理人</small></a>
+  </nav>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <span>SCARLET VINCI®</span>
+        <button class="drawer-close" id="drawerClose" type="button" aria-label="关闭导航">×</button>
+      </div>
+      <nav class="drawer-links" aria-label="完整导航">
+        <a href="#/home"><span>01</span><b>首页</b><small>INDEX</small></a>
+        <a href="#/shop/perfume"><span>02</span><b>艺术香水</b><small>ART FRAGRANCE</small></a>
+        <a href="#/shop/candle"><span>03</span><b>香氛蜡烛</b><small>SCENTED CANDLE</small></a>
+        <a href="#/maker"><span>04</span><b>主理人与工作室</b><small>THE MAKER</small></a>
+      </nav>
+      <div class="drawer-foot">
+        <p>ESSENCE LABORATORY<br>SHANGHAI</p>
+        <button id="drawerInquiry" type="button">订购与合作咨询 ↗</button>
+      </div>
+    </div>
+  </aside>
+
+  <section class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <div class="search-head">
+      <button id="searchBack" type="button" aria-label="关闭搜索">←</button>
+      <label><span>搜索</span><input id="searchInput" type="search" placeholder="输入香水名、香调或编号" autocomplete="off"></label>
+    </div>
+    <div class="search-body">
+      <p class="eyebrow">POPULAR / 热门搜索</p>
+      <div class="search-chips" id="searchChips"></div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </section>
+
+  <dialog class="reservation-dialog" id="reservationDialog">
+    <form class="reservation-form" id="reservationForm">
+      <div class="form-head">
+        <div><p class="eyebrow">PRIVATE ORDER</p><h2>预约此款</h2></div>
+        <button id="reservationClose" type="button" aria-label="关闭预约表单">×</button>
+      </div>
+      <p class="reservation-product" id="reservationProduct"></p>
+      <div class="field-grid">
+        <label><span>姓名 *</span><input name="customer_name" required autocomplete="name"></label>
+        <label><span>手机号 *</span><input name="phone" required inputmode="tel" autocomplete="tel"></label>
+        <label><span>微信号</span><input name="wechat_id" autocomplete="off"></label>
+        <label class="full"><span>收货地址 *</span><textarea name="shipping_address" required autocomplete="street-address"></textarea></label>
+        <label class="full"><span>备注</span><textarea name="note"></textarea></label>
+      </div>
+      <label class="consent"><input type="checkbox" required><span>我同意工作人员使用以上信息联系我确认库存、配送与付款方式。</span></label>
+      <input class="honeypot" name="website" tabindex="-1" autocomplete="off">
+      <button class="submit-button" type="submit">提交预约 <span>↗</span></button>
+      <p class="form-status" id="formStatus" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=10"></script>
+</body>
+</html>
