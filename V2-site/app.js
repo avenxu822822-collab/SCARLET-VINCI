@@ -35,6 +35,10 @@ const heroSlides = [
 
 const app = document.querySelector("#app");
 const topbar = document.querySelector("#topbar");
+const siteMusic = document.querySelector("#siteMusic");
+const entryGate = document.querySelector("#entryGate");
+const entryButton = document.querySelector("#entryButton");
+const musicToggle = document.querySelector("#musicToggle");
 const drawer = document.querySelector("#drawer");
 const menuButton = document.querySelector("#menuButton");
 const searchOverlay = document.querySelector("#searchOverlay");
@@ -46,9 +50,66 @@ const formStatus = document.querySelector("#formStatus");
 let activeProduct = null;
 let heroTimer = null;
 let heroIndex = 0;
+let entryDismissed = false;
 
 function esc(value) {
   return String(value).replace(/[&<>"]/g, character => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[character]);
+}
+
+function syncMusicToggle() {
+  if (!musicToggle || !siteMusic) return;
+  const playing = !siteMusic.paused;
+  musicToggle.setAttribute("aria-pressed", String(playing));
+  musicToggle.setAttribute("aria-label", playing ? "暂停背景音乐" : "播放背景音乐");
+  musicToggle.textContent = playing ? "♪" : "×";
+}
+
+async function playSiteMusic({ silent = false } = {}) {
+  if (!siteMusic) return false;
+  siteMusic.volume = 0.6;
+  try {
+    await siteMusic.play();
+    document.body.classList.add("music-ready");
+    syncMusicToggle();
+    return true;
+  } catch (error) {
+    if (!silent) showToast("点击进入后即可播放背景音乐");
+    syncMusicToggle();
+    return false;
+  }
+}
+
+function hideEntryGate() {
+  if (!entryGate || entryDismissed) return;
+  entryDismissed = true;
+  entryGate.classList.add("is-entering");
+  document.body.classList.remove("entry-locked");
+  setTimeout(() => { entryGate.hidden = true; }, 820);
+}
+
+function initMusicExperience() {
+  if (!entryGate || !entryButton || !siteMusic || !musicToggle) return;
+  document.body.classList.add("entry-locked");
+  syncMusicToggle();
+  entryButton.addEventListener("click", async () => {
+    entryButton.disabled = true;
+    const played = await playSiteMusic();
+    if (played) hideEntryGate();
+    else entryButton.disabled = false;
+  });
+  musicToggle.addEventListener("click", async () => {
+    if (siteMusic.paused) await playSiteMusic();
+    else {
+      siteMusic.pause();
+      syncMusicToggle();
+    }
+  });
+  siteMusic.addEventListener("play", syncMusicToggle);
+  siteMusic.addEventListener("pause", syncMusicToggle);
+  setTimeout(async () => {
+    const played = await playSiteMusic({ silent: true });
+    if (played) hideEntryGate();
+  }, 360);
 }
 
 function productCard(product) {
@@ -342,3 +403,4 @@ window.addEventListener("keydown", event => {
   }
 });
 router();
+initMusicExperience();

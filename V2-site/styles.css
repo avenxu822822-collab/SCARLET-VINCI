@@ -21,6 +21,7 @@
 html { scroll-behavior: smooth; background: var(--ink); }
 body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
 body.locked { overflow: hidden; }
+body.entry-locked { overflow: hidden; }
 button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
@@ -59,6 +60,38 @@ a { color: inherit; }
 .bottom-nav a.active:before { content: ""; position: absolute; top: 0; width: 28px; height: 1px; background: var(--red); }
 .nav-icon { font: 19px/1 var(--display); }
 .bottom-nav small { font-family: var(--cn); font-size: 9px; letter-spacing: .05em; }
+
+/* Audio entry */
+.entry-gate {
+  position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; padding: max(22px,env(safe-area-inset-top)) 22px max(22px,env(safe-area-inset-bottom));
+  background: #050505; color: var(--white); opacity: 1; visibility: visible; transition: opacity .75s ease, visibility .75s ease;
+}
+.entry-gate:before {
+  content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(0,0,0,.24),rgba(0,0,0,.76)), url("assets/hero/ombre-portrait-01.webp") center 24% / cover no-repeat;
+  filter: contrast(1.08) saturate(.86); transform: scale(1.02);
+}
+.entry-gate:after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(196,40,46,.72); opacity: .8; }
+.entry-button {
+  position: relative; z-index: 1; width: min(520px,100%); min-height: min(76svh,680px); border: 1px solid rgba(255,253,247,.32); border-radius: 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 34px 22px; background: rgba(5,5,5,.18);
+  color: inherit; text-align: center; cursor: pointer; backdrop-filter: blur(2px); transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s ease, background .35s ease;
+}
+.entry-button:hover, .entry-button:focus-visible { border-color: rgba(196,40,46,.85); background: rgba(5,5,5,.28); outline: none; }
+.entry-kicker { display: block; color: rgba(255,253,247,.68); font-size: 10px; font-weight: 700; letter-spacing: .18em; }
+.entry-title { display: block; margin-top: 18px; font: 400 clamp(46px,13vw,82px)/.88 var(--display); text-transform: uppercase; }
+.entry-title em { color: var(--scarlet); font-style: normal; }
+.entry-copy { display: block; margin-top: 23px; color: rgba(255,253,247,.72); font: 13px/1.7 var(--cn); }
+.entry-action { display: inline-flex; margin-top: 38px; padding-bottom: 7px; border-bottom: 1px solid var(--scarlet); color: var(--scarlet); font-size: 10px; font-weight: 700; letter-spacing: .16em; }
+.entry-gate.is-entering { opacity: 0; visibility: hidden; pointer-events: none; }
+.entry-gate.is-entering .entry-button { transform: scale(1.025); }
+.music-toggle {
+  position: fixed; right: 13px; bottom: calc(var(--bottom) + env(safe-area-inset-bottom) + 14px); z-index: 70;
+  width: 36px; height: 36px; border: 1px solid rgba(11,11,10,.22); border-radius: 50%; background: rgba(255,253,247,.86); color: var(--ink);
+  display: grid; place-items: center; font: 700 15px/1 var(--display); box-shadow: 0 8px 24px rgba(0,0,0,.12); backdrop-filter: blur(12px); cursor: pointer;
+  opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease, background .25s ease, color .25s ease;
+}
+body.music-ready .music-toggle { opacity: 1; visibility: visible; }
+.music-toggle[aria-pressed="false"] { background: rgba(11,11,10,.82); color: var(--white); }
 
 /* Hero */
 .hero { position: relative; min-height: 100svh; background: #070707; color: var(--white); overflow: hidden; }

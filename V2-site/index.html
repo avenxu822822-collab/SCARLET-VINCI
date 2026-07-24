@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0a0a0a">
   <meta name="description" content="SCARLET VINCI® 香气、设计与沉浸式叙事工作室。">
   <title>SCARLET VINCI® | Essence Laboratory</title>
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <a class="skip-link" href="#app">跳到主要内容</a>
@@ -29,6 +29,17 @@
     <a href="#/shop/all" data-nav="catalogue"><span class="nav-icon">▦</span><small>选购</small></a>
     <a href="#/maker" data-nav="maker"><span class="nav-icon">○</span><small>主理人</small></a>
   </nav>
+
+  <audio id="siteMusic" src="assets/audio/sv-v2-theme.m4a" preload="auto" loop playsinline></audio>
+  <section class="entry-gate" id="entryGate" role="dialog" aria-modal="true" aria-labelledby="entryTitle">
+    <button class="entry-button" id="entryButton" type="button">
+      <span class="entry-kicker">SCARLET VINCI® / V2</span>
+      <span class="entry-title" id="entryTitle">ENTER<br><em>THE SCENT</em></span>
+      <span class="entry-copy">点击进入，开启背景音乐。</span>
+      <span class="entry-action">ENTER / 进入</span>
+    </button>
+  </section>
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="暂停背景音乐" aria-pressed="true">♪</button>
 
   <aside class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer-panel">
@@ -83,6 +94,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
